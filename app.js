@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
 const teamMembers = [];
 
@@ -16,30 +17,54 @@ const teamMembers = [];
 // and to create objects for each team member (using the correct classes as blueprints!)
 function teamQuestions() {
 
-    function managerQuests() {
+    function employeeQuests() {
         console.log("Answer the questions to build your team");
         inquirer.prompt([
             {
                 type: "input",
-                name: "managerName",
-                message: "What is your manager's name?",
+                name: "employeeName",
+                message: "What is your employee's name?",
                 validate: answer => {
                     if (answer !== "") {
                         return true;
                     }
                     return "Please enter at least one character.";
                 }
+            },
+            {
+                type: "input",
+                name: "employeeId",
+                message: "What is your employee's id?",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter at least one character.";
+                }
+            },
+            {
+                type: "input",
+                name: "employeeEmail",
+                message: "What is your employee's email?",
+
+                    validate: answer => {
+                        if (answer !== "") {
+                            return true;
+                        }
+                        return "Please enter at least one character.";
+                    }
             }
         
+
     
 ]).then(answers => {
-    const manager = new Manager(answers.managerName);
-    console.log("answers is:" + manager)
-    teamMembers.push(manager);
+    //const employee = new employee(employee.managerName, employee.employeeId, employee.employeeEmail);
+   // console.log("answers is:" + employee)
+
     
 });
     }
-    managerQuests()
+    employeeQuests()
     
 }
 
