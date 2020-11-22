@@ -159,7 +159,9 @@ function addEngineer() {
             }
         }
     ]).then(answers => {
-
+        const engineer = new Engineer(employeeName, employeeId, employeeEmail, answers.engineerGithub);
+        teamMembers.push(engineer);
+        console.log(teamMembers)
         addMoreQuest();
     });
 }
@@ -178,7 +180,9 @@ function addIntern() {
             }
         }
     ]).then(answers => {
-
+        const intern = new Intern(employeeName, employeeId, employeeEmail, answers.internSchool);
+        teamMembers.push(intern);
+        console.log(teamMembers)
         addMoreQuest();
     });
 }
