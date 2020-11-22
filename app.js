@@ -12,14 +12,68 @@ const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
 const teamMembers = [];
-const employee = new employee(answers.employeeName, answers.employeeId, answers.employeeEmail);
+//const employee = new employee(answers.employeeName, answers.employeeId, answers.employeeEmail);
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 function teamQuestions() {
     console.log("Answer the questions to build your team");
+    function createTeammember() {
+
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "position",
+            message: "What position does this team member have?",
+            choices: [
+                "Manager",
+                "Intern",
+                "Engineer"
+            ]
+        }
+    ]).then(userChoice => {
+        switch (userChoice.position) {
+            case "Manager":
+                addManager();
+                break;
+            case "Engineer":
+                addEngineer();
+                break;
+            case "Intern":
+                addIntern();
+                            
+        }
+    });
+}
     function employeeQuests() {
         console.log("Adding new employee...");
+        function createTeammember() {
+
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "position",
+            message: "What position does this team member have?",
+            choices: [
+                "Manager",
+                "Intern",
+                "Engineer"
+            ]
+        }
+    ]).then(userChoice => {
+        switch (userChoice.position) {
+            case "Manager":
+                addManager();
+                break;
+            case "Engineer":
+                addEngineer();
+                break;
+            case "Intern":
+                addIntern();
+                            
+        }
+    });
+}
         inquirer.prompt([
             {
                 type: "input",
@@ -61,38 +115,14 @@ function teamQuestions() {
 ]).then(answers => {
     
     console.log("answers is:" + answers.employeeName);
-
+    employeeName = answers.employeeName
+    employeeId = answers.employeeId
+    employeeEmail = answers.employeeEmail
     createTeammember();
 });
-function createTeammember() {
 
-    inquirer.prompt([
-        {
-            type: "list",
-            name: "position",
-            message: "What position does this team member have?",
-            choices: [
-                "Manager",
-                "Intern",
-                "Engineer"
-            ]
-        }
-    ]).then(userChoice => {
-        switch (userChoice.position) {
-            case "Manager":
-                addManager();
-                break;
-            case "Engineer":
-                addEngineer();
-                break;
-            case "Intern":
-                addIntern();
-                            
-        }
-    });
-}
 //questions specific to the positions here
-function addEngineer() {
+function addManager() {
     inquirer.prompt([
 {
     type: "input",
@@ -109,6 +139,9 @@ function addEngineer() {
     }
 }
 ]).then(answers => {
+    const manager = new Manager(employeeName, employeeId, employeeEmail, answers.managerOfficeNumber);
+    teamMembers.push(manager);
+    console.log(teamMembers)
     addMoreQuest();
 });
 }
