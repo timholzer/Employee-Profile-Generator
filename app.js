@@ -8,43 +8,17 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
 const teamMembers = [];
-//const employee = new employee(answers.employeeName, answers.employeeId, answers.employeeEmail);
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 function teamQuestions() {
     console.log("Answer the questions to build your team");
-    function createTeammember() {
 
-    inquirer.prompt([
-        {
-            type: "list",
-            name: "position",
-            message: "What position does this team member have?",
-            choices: [
-                "Manager",
-                "Intern",
-                "Engineer"
-            ]
-        }
-    ]).then(userChoice => {
-        switch (userChoice.position) {
-            case "Manager":
-                addManager();
-                break;
-            case "Engineer":
-                addEngineer();
-                break;
-            case "Intern":
-                addIntern();
-                            
-        }
-    });
-}
     function employeeQuests() {
         console.log("Adding new employee...");
         function createTeammember() {
@@ -110,8 +84,7 @@ function teamQuestions() {
                     }
             }
         
-
-    
+   
 ]).then(answers => {
     
     console.log("answers is:" + answers.employeeName);
@@ -129,13 +102,10 @@ function addManager() {
     name: "managerOfficeNumber",
     message: "What is this manager's office number?",
     validate: answer => {
-        const pass = answer.match(
-            /^[1-9]\d*$/
-        );
-        if (pass) {
+        if (answer !== "") {
             return true;
         }
-        return "Please enter a positive number greater than zero.";
+        return "Please enter at least one character.";
     }
 }
 ]).then(answers => {
@@ -203,6 +173,7 @@ function addMoreQuest(){
                 employeeQuests()
                 break;
             case "No":
+                console.log("you chose to add no more");
                 whatevermybuildfunctiongetsnamedlater();
 
             }
@@ -213,10 +184,15 @@ function addMoreQuest(){
     
 }
 
-    
+ teamQuestions();
+function whatevermybuildfunctiongetsnamedlater() {
+    console.log("writing file");
+    fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
+    console.log("file wrote");
 
 
-teamQuestions();
+}
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
