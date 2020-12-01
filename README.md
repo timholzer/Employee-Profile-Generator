@@ -1,7 +1,7 @@
  ![](screenshot.png)
-    # Employ Profile Generator 
+    # Employee Profile Generator 
    
-    This program generates an employed profile webpage based on your input. There are three employee types: manager, engineer, and intern.
+    This program generates an employee profile webpage based on your input. There are three employee types: manager, engineer, and intern.
     
 * [Installation](#Installation)
     
